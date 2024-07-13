@@ -150,18 +150,22 @@ def WriteFile(ascii_image):
 font_size = 8
 
 while True:
-    imagePath = input("imagePath />")
+    try:
 
-    image = Image.open(imagePath)
-    preventive_resize = PreventiveScaling(image,font_size)
-    gray_image = RemoveColors(preventive_resize)
-    gausian = ExtendedDifferenceOfGausians(gray_image)
-    vectors = SobelEdge(gausian)
-    DownScaleImage = DownScaleImage(gray_image, font_size)
-    scaled_down_vectors = ScaleDownProperly(vectors,treshold=5,scaling_factor=font_size)
-    build_ascii = BuildAscii(DownScaleImage,scaled_down_vectors)
-    WriteFile(build_ascii)
+        imagePath = input("imagePath />")
+        image = Image.open(imagePath)
+        preventive_resize = PreventiveScaling(image,font_size)
+        gray_image = RemoveColors(preventive_resize)
+        gausian = ExtendedDifferenceOfGausians(gray_image)
+        vectors = SobelEdge(gausian)
+        DownScaleImage = DownScaleImage(gray_image, font_size)
+        scaled_down_vectors = ScaleDownProperly(vectors,treshold=5,scaling_factor=font_size)
+        build_ascii = BuildAscii(DownScaleImage,scaled_down_vectors)
+        WriteFile(build_ascii)
 
-    print("Image converted")
+        print("Image converted")
    
+    except:
+        print("invalid image path")
+    
 
